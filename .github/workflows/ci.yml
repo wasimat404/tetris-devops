@@ -1,4 +1,3 @@
-cat .github/workflows/ci.yml
 name: CI
 
 on:
@@ -43,7 +42,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-trivy-scan:
+  trivy-scan:
     name: Trivy vulnerability scan
     runs-on: ubuntu-latest
     needs: build-and-push
