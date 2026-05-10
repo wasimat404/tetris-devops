@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TETRIS // DevOps Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <main class="game-container">
+    <header class="header">
+      <h1 class="title">
+        <span class="t-letter c-i">T</span><span class="t-letter c-o">E</span><span class="t-letter c-t">T</span><span class="t-letter c-s">R</span><span class="t-letter c-z">I</span><span class="t-letter c-l">S</span>
+      </h1>
+      <p class="subtitle">// DEVOPS EDITION</p>
+    </header>
+
+    <div class="game-layout">
+      <aside class="side-panel">
+        <div class="panel">
+          <h2 class="panel-title">HOLD</h2>
+          <canvas id="hold" width="120" height="120"></canvas>
+        </div>
+        <div class="panel controls">
+          <h2 class="panel-title">CONTROLS</h2>
+          <ul>
+            <li><kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Move</span></li>
+            <li><kbd>&darr;</kbd><span>Soft drop</span></li>
+            <li><kbd>&uarr;</kbd><span>Rotate</span></li>
+            <li><kbd>SPACE</kbd><span>Hard drop</span></li>
+            <li><kbd>C</kbd><span>Hold</span></li>
+            <li><kbd>P</kbd><span>Pause</span></li>
+            <li><kbd>R</kbd><span>Restart</span></li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="board-wrapper">
+        <canvas id="board" width="300" height="600"></canvas>
+        <div id="overlay" class="overlay hidden">
+          <h2 id="overlay-title">PAUSED</h2>
+          <p id="overlay-text">Press P to resume</p>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <div class="panel">
+          <h2 class="panel-title">NEXT</h2>
+          <canvas id="next" width="120" height="120"></canvas>
+        </div>
+        <div class="panel stat-panel">
+          <h2 class="panel-title">SCORE</h2>
+          <p class="stat" id="score">0</p>
+        </div>
+        <div class="panel stat-panel">
+          <h2 class="panel-title">LEVEL</h2>
+          <p class="stat" id="level">1</p>
+        </div>
+        <div class="panel stat-panel">
+          <h2 class="panel-title">LINES</h2>
+          <p class="stat" id="lines">0</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <span class="version">v1.0.0</span>
+      <span class="dot" id="status-dot">&bull;</span>
+      <span class="env" id="env-label">env: local</span>
+    </footer>
+  </main>
+
+  <script src="tetris.js"></script>
+</body>
+</html>
