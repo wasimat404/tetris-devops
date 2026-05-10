@@ -1,0 +1,34 @@
+# VCS
+.git
+.gitignore
+.gitattributes
+
+# Editor
+.vscode
+.idea
+*.swp
+*.swo
+
+# Docs / CI / IaC — never needed inside the image
+README.md
+.github/
+k8s/
+terraform/
+helm/
+
+# Dockerfiles themselves (we don't need them inside the image)
+Dockerfile*
+.dockerignore
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs / env
+*.log
+.env
+.env.*
+
+# Future-proofing for Node tooling
+node_modules/
+npm-debug.log*
