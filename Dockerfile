@@ -26,8 +26,10 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy game assets from the prep stage. --chown ensures correct ownership.
 COPY --from=prep --chown=nginx:nginx /app /usr/share/nginx/html
 
-# nginx-unprivileged already runs as user 'nginx' (uid 101).
-# Being explicit is good hygiene.
+# Switch to root to upgrade base packages (CVE patches) and install wget
+# for the HEALTHCHECK. Then drop back to the non-root nginx user.
+USER root
+RUN apk update && apk upgrade --no-cache && apk add --no-cache wget
 USER nginx
 
 EXPOSE 8080
