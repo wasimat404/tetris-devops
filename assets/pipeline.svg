@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 840" width="820" height="840" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0518"/>
+      <stop offset="0.5" stop-color="#0d0824"/>
+      <stop offset="1" stop-color="#1a0f3d"/>
+    </linearGradient>
+
+    <!-- Neon glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft glow filter -->
+    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Faint dotted background grid -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.6" fill="#5a4cff" opacity="0.10"/>
+    </pattern>
+
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a82c8"/>
+    </marker>
+
+    <!-- Reusable paths for animated dot motion -->
+    <path id="p_dev_repo"      d="M 410,110 L 410,150" fill="none"/>
+    <path id="p_repo_ci"       d="M 410,220 L 410,260" fill="none"/>
+    <path id="p_ci_dh"         d="M 290,400 C 260,440 220,460 200,480" fill="none"/>
+    <path id="p_ci_cfg"        d="M 530,400 C 560,440 600,460 620,480" fill="none"/>
+    <path id="p_dh_argo"       d="M 200,550 C 230,600 350,620 400,640" fill="none"/>
+    <path id="p_cfg_argo"      d="M 620,550 C 590,600 470,620 420,640" fill="none"/>
+    <path id="p_argo_eks"      d="M 410,710 L 410,750" fill="none"/>
+
+    <!-- Dot template (we'll use it via &lt;use&gt;) -->
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="840" fill="url(#bg)"/>
+  <rect width="820" height="840" fill="url(#grid)"/>
+
+  <!-- ============== TITLE ============== -->
+  <g font-size="14" fill="#8a82c8" letter-spacing="3">
+    <text x="410" y="30" text-anchor="middle">TETRIS // DEVOPS PIPELINE</text>
+  </g>
+
+  <!-- ============== STATION 1: DEVELOPER + git push ============== -->
+  <g filter="url(#glow)">
+    <rect x="330" y="55" width="160" height="55" rx="8" fill="#0d0824" stroke="#00f0f0" stroke-width="1.8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="410" y="80" text-anchor="middle" fill="#00f0f0" font-size="11" letter-spacing="2">DEVELOPER</text>
+  <text x="410" y="98" text-anchor="middle" fill="#e8e3ff" font-size="11">git push</text>
+
+  <!-- Path Developer → Repo -->
+  <use href="#p_dev_repo" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5"/>
+  <circle r="3.5" fill="#00f0f0" filter="url(#softglow)">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#p_dev_repo"/></animateMotion>
+  </circle>
+  <circle r="3" fill="#ff2bd6" filter="url(#softglow)" opacity="0.7">
+    <animateMotion dur="2s" begin="0.7s" repeatCount="indefinite"><mpath href="#p_dev_repo"/></animateMotion>
+  </circle>
+
+  <!-- ============== STATION 2: APP REPO ============== -->
+  <g filter="url(#glow)">
+    <rect x="310" y="150" width="200" height="70" rx="8" fill="#0d0824" stroke="#f0f000" stroke-width="1.8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="410" y="175" text-anchor="middle" fill="#f0f000" font-size="11" letter-spacing="2">APP REPO</text>
+  <text x="410" y="194" text-anchor="middle" fill="#e8e3ff" font-size="12">tetris-devops</text>
+  <text x="410" y="210" text-anchor="middle" fill="#8a82c8" font-size="9">code · Dockerfile · CI</text>
+
+  <!-- Path Repo → CI -->
+  <use href="#p_repo_ci" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5"/>
+  <circle r="3.5" fill="#f0f000" filter="url(#softglow)">
+    <animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#p_repo_ci"/></animateMotion>
+  </circle>
+
+  <!-- ============== STATION 3: CI (3 sub-boxes) ============== -->
+  <!-- CI wrapper -->
+  <g>
+    <rect x="100" y="260" width="620" height="130" rx="10" fill="#0d0824" stroke="#a000f0" stroke-width="1.5" opacity="0.6" filter="url(#glow)">
+      <animate attributeName="stroke-opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <text x="120" y="280" fill="#a000f0" font-size="10" letter-spacing="2">GITHUB ACTIONS</text>
+
+    <!-- Build -->
+    <rect x="130" y="300" width="170" height="70" rx="6" fill="#1a0f3d" stroke="#a000f0" stroke-width="1.5" filter="url(#softglow)"/>
+    <text x="215" y="324" text-anchor="middle" fill="#a000f0" font-size="10" letter-spacing="2">BUILD &amp; PUSH</text>
+    <text x="215" y="342" text-anchor="middle" fill="#e8e3ff" font-size="10">docker build</text>
+    <text x="215" y="358" text-anchor="middle" fill="#8a82c8" font-size="9">multi-stage · cached</text>
+
+    <!-- Trivy -->
+    <rect x="325" y="300" width="170" height="70" rx="6" fill="#1a0f3d" stroke="#f02060" stroke-width="1.5" filter="url(#softglow)"/>
+    <text x="410" y="324" text-anchor="middle" fill="#f02060" font-size="10" letter-spacing="2">TRIVY SCAN</text>
+    <text x="410" y="342" text-anchor="middle" fill="#e8e3ff" font-size="10">CVE gate</text>
+    <text x="410" y="358" text-anchor="middle" fill="#8a82c8" font-size="9">HIGH+CRITICAL = fail</text>
+
+    <!-- Sonar -->
+    <rect x="520" y="300" width="170" height="70" rx="6" fill="#1a0f3d" stroke="#2060f0" stroke-width="1.5" filter="url(#softglow)"/>
+    <text x="605" y="324" text-anchor="middle" fill="#2060f0" font-size="10" letter-spacing="2">SONARCLOUD</text>
+    <text x="605" y="342" text-anchor="middle" fill="#e8e3ff" font-size="10">code quality</text>
+    <text x="605" y="358" text-anchor="middle" fill="#8a82c8" font-size="9">SAST · smells</text>
+  </g>
+
+  <!-- Paths CI → DockerHub and CI → Config repo (curved) -->
+  <use href="#p_ci_dh" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5" fill="none"/>
+  <use href="#p_ci_cfg" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5" fill="none"/>
+
+  <circle r="3.5" fill="#a000f0" filter="url(#softglow)">
+    <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#p_ci_dh"/></animateMotion>
+  </circle>
+  <circle r="3" fill="#a000f0" filter="url(#softglow)" opacity="0.7">
+    <animateMotion dur="2.2s" begin="0.9s" repeatCount="indefinite"><mpath href="#p_ci_dh"/></animateMotion>
+  </circle>
+
+  <circle r="3.5" fill="#00f070" filter="url(#softglow)">
+    <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#p_ci_cfg"/></animateMotion>
+  </circle>
+  <circle r="3" fill="#00f070" filter="url(#softglow)" opacity="0.7">
+    <animateMotion dur="2.2s" begin="0.9s" repeatCount="indefinite"><mpath href="#p_ci_cfg"/></animateMotion>
+  </circle>
+
+  <!-- ============== STATION 4: DOCKERHUB + CONFIG REPO ============== -->
+  <!-- DockerHub -->
+  <g filter="url(#glow)">
+    <rect x="100" y="480" width="200" height="70" rx="8" fill="#0d0824" stroke="#2060f0" stroke-width="1.8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="200" y="505" text-anchor="middle" fill="#2060f0" font-size="11" letter-spacing="2">DOCKERHUB</text>
+  <text x="200" y="524" text-anchor="middle" fill="#e8e3ff" font-size="11">zenew/tetris-devops</text>
+  <text x="200" y="540" text-anchor="middle" fill="#8a82c8" font-size="9">tags: latest · sha-XXX</text>
+
+  <!-- Config repo -->
+  <g filter="url(#glow)">
+    <rect x="520" y="480" width="200" height="70" rx="8" fill="#0d0824" stroke="#00f070" stroke-width="1.8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3.4s" begin="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="620" y="505" text-anchor="middle" fill="#00f070" font-size="11" letter-spacing="2">CONFIG REPO</text>
+  <text x="620" y="524" text-anchor="middle" fill="#e8e3ff" font-size="11">tetris-devops-config</text>
+  <text x="620" y="540" text-anchor="middle" fill="#8a82c8" font-size="9">k8s manifests · auto-bumped</text>
+
+  <!-- Paths converging to ArgoCD -->
+  <use href="#p_dh_argo" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5" fill="none"/>
+  <use href="#p_cfg_argo" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5" fill="none"/>
+
+  <circle r="3.5" fill="#2060f0" filter="url(#softglow)">
+    <animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#p_dh_argo"/></animateMotion>
+  </circle>
+  <circle r="3.5" fill="#00f070" filter="url(#softglow)">
+    <animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#p_cfg_argo"/></animateMotion>
+  </circle>
+
+  <!-- ============== STATION 5: ARGOCD ============== -->
+  <g filter="url(#glow)">
+    <rect x="310" y="640" width="200" height="70" rx="8" fill="#0d0824" stroke="#f0a000" stroke-width="1.8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="410" y="665" text-anchor="middle" fill="#f0a000" font-size="11" letter-spacing="2">ARGOCD</text>
+  <text x="410" y="684" text-anchor="middle" fill="#e8e3ff" font-size="11">GitOps controller</text>
+  <text x="410" y="700" text-anchor="middle" fill="#8a82c8" font-size="9">syncs every 3 min · self-heal</text>
+
+  <!-- Path ArgoCD → EKS -->
+  <use href="#p_argo_eks" stroke="#5a4cff" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5"/>
+  <circle r="3.5" fill="#f0a000" filter="url(#softglow)">
+    <animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#p_argo_eks"/></animateMotion>
+  </circle>
+  <circle r="3" fill="#f0a000" filter="url(#softglow)" opacity="0.7">
+    <animateMotion dur="1.6s" begin="0.6s" repeatCount="indefinite"><mpath href="#p_argo_eks"/></animateMotion>
+  </circle>
+
+  <!-- ============== STATION 6: EKS CLUSTER ============== -->
+  <g filter="url(#glow)">
+    <rect x="160" y="750" width="500" height="70" rx="8" fill="#0d0824" stroke="#00f0f0" stroke-width="1.8" opacity="0.9">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <text x="410" y="773" text-anchor="middle" fill="#00f0f0" font-size="11" letter-spacing="2">EKS CLUSTER · ap-south-1</text>
+
+  <!-- 3 pods -->
+  <g>
+    <rect x="220" y="785" width="60" height="22" rx="3" fill="#1a0f3d" stroke="#00f070" stroke-width="1"/>
+    <text x="250" y="800" text-anchor="middle" fill="#00f070" font-size="9">pod</text>
+
+    <rect x="290" y="785" width="60" height="22" rx="3" fill="#1a0f3d" stroke="#00f070" stroke-width="1"/>
+    <text x="320" y="800" text-anchor="middle" fill="#00f070" font-size="9">pod</text>
+
+    <rect x="360" y="785" width="60" height="22" rx="3" fill="#1a0f3d" stroke="#00f070" stroke-width="1"/>
+    <text x="390" y="800" text-anchor="middle" fill="#00f070" font-size="9">pod</text>
+
+    <rect x="450" y="785" width="80" height="22" rx="3" fill="#1a0f3d" stroke="#ff2bd6" stroke-width="1"/>
+    <text x="490" y="800" text-anchor="middle" fill="#ff2bd6" font-size="9">NLB</text>
+
+    <rect x="540" y="785" width="100" height="22" rx="3" fill="#1a0f3d" stroke="#e8e3ff" stroke-width="1"/>
+    <text x="590" y="800" text-anchor="middle" fill="#e8e3ff" font-size="9">internet</text>
+
+    <!-- Mini arrow between NLB and Internet -->
+    <line x1="535" y1="796" x2="538" y2="796" stroke="#8a82c8" stroke-width="1"/>
+  </g>
+
+</svg>

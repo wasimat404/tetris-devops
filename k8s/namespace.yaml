@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tetris
+  labels:
+    app.kubernetes.io/name: tetris-devops
+    app.kubernetes.io/managed-by: kubectl
