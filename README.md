@@ -352,9 +352,6 @@ DockerHub, GitHub Actions (public repo), SonarCloud (public repo), Trivy: **all 
 
 ---
 
-## 📜 License
-
-MIT
 
 ---
 
